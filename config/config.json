@@ -9,6 +9,6 @@
     "Timezone": "UTC"
   },
   "ServerConfigurations": {
-    "Port": 9000
+    "Port": 8080
   }
 }
