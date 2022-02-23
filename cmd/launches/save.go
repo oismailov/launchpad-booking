@@ -1,4 +1,4 @@
-package spacex
+package launches
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func SaveToDB(records []spacexLaunch) error {
+func SaveLaunchesToDB(records []spacexLaunch) error {
 	if len(records) <= 0 {
 		log.Println("There are no records")
 	}
@@ -16,16 +16,17 @@ func SaveToDB(records []spacexLaunch) error {
 	var valueArgs []interface{}
 
 	for _, record := range records {
-		valueStrings = append(valueStrings, "(?, ?, NOW(), NOW())")
+		valueStrings = append(valueStrings, "(?, ?, ?, NOW(), NOW())")
 
-		valueArgs = append(valueArgs, record.Launchpad)
+		valueArgs = append(valueArgs, record.LaunchID)
+		valueArgs = append(valueArgs, record.LaunchpadID)
 		valueArgs = append(valueArgs, record.DateLocal)
 	}
 
 	smt := "INSERT INTO spase_x_launches " +
-		"(launchpad_uuid, date_local, created_at, updated_at) " +
+		"(launch_id, launchpad_id, date_local, created_at, updated_at) " +
 		"VALUES %s " +
-		"ON CONFLICT (launchpad_uuid, date_local) " +
+		"ON CONFLICT (launch_id, launchpad_id, date_local) " +
 		"DO NOTHING"
 
 	smt = fmt.Sprintf(smt, strings.Join(valueStrings, ","))

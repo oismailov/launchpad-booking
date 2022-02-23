@@ -1,4 +1,4 @@
-package spacex
+package launches
 
 import (
 	"encoding/json"
@@ -11,11 +11,12 @@ import (
 const spacexLaunchesApi = "https://api.spacexdata.com/v4/launches"
 
 type spacexLaunch struct {
-	Launchpad string    `json:"launchpad"`
-	DateLocal time.Time `json:"date_local"`
+	LaunchID    string    `json:"id"`
+	LaunchpadID string    `json:"launchpad"`
+	DateLocal   time.Time `json:"date_local"`
 }
 
-func GetParsedData() []spacexLaunch {
+func GetParsedLaunches() []spacexLaunch {
 	response, err := http.Get(spacexLaunchesApi)
 
 	if err != nil {
