@@ -13,6 +13,8 @@ func main() {
 
 	err := dbInstance.AutoMigrate(&model.SpaseXLaunches{})
 
+	dbInstance.Exec("CREATE UNIQUE INDEX spase_x_launches_date_local_unique ON spase_x_launches (launchpad_uuid, date_local)")
+
 	if err != nil {
 		fmt.Printf("unable to run migrations : %v", err)
 	}
