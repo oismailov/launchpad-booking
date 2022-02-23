@@ -3,7 +3,7 @@
     "Name": "launchpad_booking",
     "Password": "Rand0m!",
     "Username": "root",
-    "Host": "localhost",
+    "Host": "postgres",
     "Port": "5432",
     "SSLMode": "disable",
     "Timezone": "UTC"
