@@ -1,0 +1,14 @@
+{
+  "DatabaseSettings": {
+    "Name": "launchpad_booking",
+    "Password": "Rand0m!",
+    "Username": "root",
+    "Host": "localhost",
+    "Port": "5432",
+    "SSLMode": "disable",
+    "Timezone": "UTC"
+  },
+  "ServerConfigurations": {
+    "Port": 9000
+  }
+}
