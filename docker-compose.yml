@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: on-failure
+    environment:
+      POSTGRES_PASSWORD: Rand0m!
+      POSTGRES_USER: root
+      POSTGRES_DB: launchpad_booking
+    ports:
+      - "5432:5432"
+  app:
+    container_name: app
+    build:
+      context: .
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    tty: true
+    depends_on:
+      - postgres
+    links:
+      - postgres
