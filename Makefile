@@ -1,4 +1,4 @@
-.PHONY: start stop init build tests migrate refresh-upcoming-launches refresh-launchpad-list refresh
+.PHONY: start stop init tests migrate refresh-upcoming-launches refresh-launchpad-list refresh
 
 start:
 	docker-compose up -d
@@ -9,14 +9,11 @@ stop:
 init:
 	echo "to be defined"
 
-build:
-	echo "to be defined"
-
 tests:
-	echo "to be defined"
+	docker-compose exec app go test -v ./tests/...
 
 migrate:
-	docker-compose exec app go run migration/migration.go
+	docker-compose exec app go run migration/run.go
 
 refresh-upcoming-launches:
 	docker-compose exec app go run cmd/launches/bin/run.go

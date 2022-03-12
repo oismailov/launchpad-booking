@@ -1,0 +1,14 @@
+{
+  "DatabaseSettings": {
+    "Name": "launchpad_booking_test",
+    "Password": "Rand0m!",
+    "Username": "root",
+    "Host": "postgres",
+    "Port": "5432",
+    "SSLMode": "disable",
+    "Timezone": "UTC"
+  },
+  "ServerConfigurations": {
+    "Port": 8080
+  }
+}

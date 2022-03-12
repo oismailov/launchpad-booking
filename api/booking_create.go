@@ -12,7 +12,7 @@ func CreateBooking(c *gin.Context) {
 	err := c.BindJSON(&booking)
 
 	if err != nil {
-		util.ResponseBadRequest(c, "Invalid request body")
+		util.ResponseBadRequest(c, "invalid request body")
 		return
 	}
 
