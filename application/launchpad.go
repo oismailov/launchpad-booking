@@ -1,10 +1,10 @@
-package svc
+package application
 
 import (
-	"github.com/oismailov/launchpad-booking/db"
 	"github.com/oismailov/launchpad-booking/model"
+	"github.com/oismailov/launchpad-booking/persistance"
 )
 
 func GetLaunchpadByID(launchpadID string) (model.SpaseXLaunchpad, error) {
-	return db.GetLaunchpadByID(launchpadID)
+	return persistance.GetLaunchpadByID(launchpadID)
 }

@@ -2,20 +2,17 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/oismailov/launchpad-booking/pkg/svc"
+	"github.com/oismailov/launchpad-booking/application"
 	"github.com/oismailov/launchpad-booking/pkg/util"
-	"net/http"
 )
 
 func ListAllBookings(c *gin.Context) {
-	bookings, err := svc.GetAllBookings()
+	bookings, err := application.GetAllBookings()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, util.Message{
-			Message: err.Error(),
-		})
+		util.ResponseBadRequest(c, err.Error())
 
 		return
 	}
 
-	c.JSON(http.StatusOK, bookings)
+	util.ResponseOK(c, bookings)
 }

@@ -1,4 +1,4 @@
-package db
+package persistance
 
 import "github.com/oismailov/launchpad-booking/model"
 
@@ -35,10 +35,10 @@ func GetAllBookings() ([]model.Booking, error) {
 	return bookings, nil
 }
 
-func DeleteBookingByUuid(bookingUuid string) error {
+func DeleteBookingByUUID(bookingUUID string) error {
 	if err := GetInstance().
 		Where(&model.Booking{
-			UUID: bookingUuid,
+			UUID: bookingUUID,
 		}).
 		Delete(&model.Booking{}).
 		Error; err != nil {
