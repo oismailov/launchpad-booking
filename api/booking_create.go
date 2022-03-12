@@ -11,7 +11,7 @@ import (
 )
 
 func CreateBooking(c *gin.Context) {
-	var booking model.Booking
+	booking := model.Booking{UUID: util.GetUUID()}
 	err := c.BindJSON(&booking)
 
 	if err != nil {
@@ -43,7 +43,7 @@ func CreateBooking(c *gin.Context) {
 	err = svc.SaveBooking(&booking)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, util.Message{
-			Message: err.Error(),
+			Message: "Unable to save a booking",
 		})
 
 		return
@@ -53,65 +53,54 @@ func CreateBooking(c *gin.Context) {
 }
 
 func isValidBooking(booking model.Booking) bool {
-	isValidLaunchpad, err := isValidLaunchpad(booking)
-	if err != nil || isValidLaunchpad == false {
-		return false
-	}
-
-	isLaunchAvailable, err := isLaunchAvailable(booking)
-	if err != nil || isLaunchAvailable == false {
-		return false
-	}
-
-	hasDuplicatedDestination, err := hasDuplicatedBooking(booking)
-	if err != nil || hasDuplicatedDestination == true {
+	if !isValidLaunchpad(booking) || !isLaunchAvailable(booking) || hasDuplicatedBooking(booking) {
 		return false
 	}
 
 	return true
 }
 
-func isValidLaunchpad(booking model.Booking) (bool, error) {
+func isValidLaunchpad(booking model.Booking) bool {
 	launchpad, err := svc.GetLaunchpadByID(booking.LaunchpadID)
 	if err != nil {
-		return false, err
+		return false
 	}
 
 	if launchpad.ID == 0 {
-		return false, nil
+		return false
 	}
 
-	return true, nil
+	return true
 }
 
-func isLaunchAvailable(booking model.Booking) (bool, error) {
+func isLaunchAvailable(booking model.Booking) bool {
 	launchDate, err := time.Parse("2006-01-02", booking.LaunchDate)
 
 	if err != nil {
-		return false, err
+		return false
 	}
 
-	launch, err := svc.GetLaunchByLaunchpadIDAndDate(booking.LaunchpadID, launchDate)
+	launch, err := svc.GetLaunchByLaunchpadIdAndDate(booking.LaunchpadID, launchDate)
 	if err != nil {
-		return false, err
+		return false
 	}
 
 	if launch.ID != 0 {
-		return false, nil
+		return false
 	}
 
-	return true, nil
+	return true
 }
 
-func hasDuplicatedBooking(booking model.Booking) (bool, error) {
-	count, err := svc.GetDuplicatedBookingsCount(booking)
+func hasDuplicatedBooking(booking model.Booking) bool {
+	bookings, err := svc.GetBookingsByLaunchpadIdAndLaunchDate(booking)
 	if err != nil {
-		return true, err
+		return true
 	}
 
-	if count > 0 {
-		return true, nil
+	if len(bookings) > 0 && bookings[0].DestinationID != booking.DestinationID {
+		return true
 	}
 
-	return false, nil
+	return false
 }
