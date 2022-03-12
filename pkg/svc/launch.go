@@ -6,6 +6,6 @@ import (
 	"time"
 )
 
-func GetLaunchByLaunchpadIDAndDate(launchpadID string, date time.Time) (model.SpaseXLaunch, error) {
-	return db.GetLaunchByLaunchpadIDAndDate(launchpadID, date)
+func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaseXLaunch, error) {
+	return db.GetLaunchByLaunchpadIdAndDate(launchpadID, date)
 }

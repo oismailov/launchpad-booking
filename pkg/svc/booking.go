@@ -9,8 +9,8 @@ func SaveBooking(booking *model.Booking) error {
 	return db.SaveBooking(booking)
 }
 
-func GetDuplicatedBookingsCount(booking model.Booking) (int64, error) {
-	return db.GetDuplicatedBookingsCount(booking)
+func GetBookingsByLaunchpadIdAndLaunchDate(booking model.Booking) ([]model.Booking, error) {
+	return db.GetBookingsByLaunchpadIdAndLaunchDate(booking)
 }
 
 func GetAllBookings() ([]model.Booking, error) {
