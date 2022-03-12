@@ -28,15 +28,23 @@ type ServerConfigurations struct {
 }
 
 func LoadConfig() {
-	configFile, errOpenFile := os.Open("config/config.json")
+	loadBaseConfig("config/config.json")
+}
 
-	if errOpenFile != nil {
-		log.Fatal(errOpenFile)
+func LoadTestConfig() {
+	loadBaseConfig("../../config/config_test.json")
+}
+
+func loadBaseConfig(path string) {
+	configFile, err := os.Open(path)
+
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	decoder := json.NewDecoder(configFile)
 	configuration := Config{}
-	err := decoder.Decode(&configuration)
+	err = decoder.Decode(&configuration)
 
 	if err != nil {
 		log.Fatal("error:", err)

@@ -1,14 +1,12 @@
-package main
+package migration
 
 import (
 	"fmt"
-	"github.com/oismailov/launchpad-booking/config"
 	"github.com/oismailov/launchpad-booking/model"
 	"github.com/oismailov/launchpad-booking/persistance"
 )
 
-func main() {
-	config.LoadConfig()
+func Migrate() {
 	dbInstance := persistance.GetInstance()
 
 	err := dbInstance.AutoMigrate(

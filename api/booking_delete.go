@@ -9,15 +9,15 @@ import (
 func DeleteBooking(c *gin.Context) {
 	bookingUUID := c.Param("uuid")
 	if !util.IsValidUUID(bookingUUID) {
-		util.ResponseBadRequest(c, "Invalid booking UUID")
+		util.ResponseBadRequest(c, "invalid booking UUID")
 		return
 	}
 
 	err := application.DeleteBookingByUUID(bookingUUID)
 	if err != nil {
-		util.ResponseBadRequest(c, "Unable to delete a booking")
+		util.ResponseBadRequest(c, "unable to delete a booking")
 		return
 	}
 
-	util.ResponseOK(c, util.Message{Message: "Booking has been deleted"})
+	util.ResponseOK(c, util.Message{Message: "booking has been deleted"})
 }
