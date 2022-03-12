@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const spacexLaunchesApi = "https://api.spacexdata.com/v4/launches"
+const spacexLaunchesApi = "https://api.spacexdata.com/v4/launches/upcoming"
 
 type spacexLaunch struct {
 	LaunchID    string    `json:"id"`

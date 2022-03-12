@@ -12,7 +12,8 @@ func GetRouter() *gin.Engine {
 	r := gin.Default()
 
 	r.Use(middleware.JSONMiddleware())
-	r.POST("/api/booking", api.CreateBooking)
+	r.POST("/api/bookings", api.CreateBooking)
+	r.GET("/api/bookings", api.ListBookings)
 
 	return r
 }

@@ -9,14 +9,26 @@ services:
       POSTGRES_USER: root
       POSTGRES_DB: launchpad_booking
     ports:
-      - "5432:5432"
+      - "8001:5432"
+  pgadmin:
+    container_name: pdadmin
+    image: dpage/pgadmin4:latest
+    restart: on-failure
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: Rand0m!
+      POSTGRES_PASSWORD: Rand0m!
+      POSTGRES_USER: root
+      POSTGRES_DB: launchpad_booking
+    ports:
+      - "8002:80"
   app:
     container_name: app
     build:
       context: .
     restart: on-failure
     ports:
-      - "8080:8080"
+      - "8003:8080"
     tty: true
     depends_on:
       - postgres

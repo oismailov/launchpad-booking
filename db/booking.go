@@ -10,14 +10,28 @@ func SaveBooking(booking *model.Booking) error {
 	return nil
 }
 
-func GetBookings(booking model.Booking) ([]model.Booking, error) {
-	var result []model.Booking
+func GetDuplicatedBookingsCount(booking model.Booking) (int64, error) {
+	var result int64
 
 	if err := GetInstance().
-		Where(&model.Booking{LaunchpadID: booking.LaunchpadID, LaunchDate: booking.LaunchDate}).
-		Find(&result).Error; err != nil {
+		Where(&model.Booking{
+			LaunchpadID:   booking.LaunchpadID,
+			LaunchDate:    booking.LaunchDate,
+			DestinationID: booking.DestinationID,
+		}).
+		Count(&result).Error; err != nil {
 		return result, err
 	}
 
 	return result, nil
+}
+
+func GetAllBookings() ([]model.Booking, error) {
+	var bookings []model.Booking
+
+	if err := GetInstance().Find(&bookings).Error; err != nil {
+		return bookings, err
+	}
+
+	return bookings, nil
 }
