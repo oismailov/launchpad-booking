@@ -10,6 +10,9 @@ services:
       POSTGRES_DB: launchpad_booking
     ports:
       - "8001:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
   pgadmin:
     container_name: pdadmin
     image: dpage/pgadmin4:latest
@@ -17,11 +20,9 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: Rand0m!
-      POSTGRES_PASSWORD: Rand0m!
-      POSTGRES_USER: root
-      POSTGRES_DB: launchpad_booking
     ports:
       - "8002:80"
+
   app:
     container_name: app
     build:
@@ -34,3 +35,9 @@ services:
       - postgres
     links:
       - postgres
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:

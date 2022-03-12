@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func ListBookings(c *gin.Context) {
+func ListAllBookings(c *gin.Context) {
 	bookings, err := svc.GetAllBookings()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, util.Message{
