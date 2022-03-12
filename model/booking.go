@@ -2,6 +2,7 @@ package model
 
 type Booking struct {
 	ID            uint   `json:"-" gorm:"primary_key"`
+	UUID          string `json:"uuid" gorm:"unique"`
 	FirstName     string `valid:"required,alpha"  json:"first_name"`
 	LastName      string `valid:"required,alpha"  json:"last_name"`
 	Gender        string `valid:"required,alpha"  json:"gender"`

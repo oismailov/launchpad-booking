@@ -11,7 +11,7 @@ import (
 )
 
 func CreateBooking(c *gin.Context) {
-	var booking model.Booking
+	booking := model.Booking{UUID: util.GetUUID()}
 	err := c.BindJSON(&booking)
 
 	if err != nil {
@@ -43,7 +43,7 @@ func CreateBooking(c *gin.Context) {
 	err = svc.SaveBooking(&booking)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, util.Message{
-			Message: err.Error(),
+			Message: "Unable to save a booking",
 		})
 
 		return

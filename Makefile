@@ -28,3 +28,6 @@ refresh:
 	docker-compose exec app go run cmd/launches/bin/run.go
 	docker-compose exec app go run cmd/launchpads/bin/run.go
 
+ssh:
+	docker-compose exec app bash
+
