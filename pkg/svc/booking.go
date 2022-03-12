@@ -9,6 +9,10 @@ func SaveBooking(booking *model.Booking) error {
 	return db.SaveBooking(booking)
 }
 
-func GetBookings(booking model.Booking) ([]model.Booking, error) {
-	return db.GetBookings(booking)
+func GetDuplicatedBookingsCount(booking model.Booking) (int64, error) {
+	return db.GetDuplicatedBookingsCount(booking)
+}
+
+func GetAllBookings() ([]model.Booking, error) {
+	return db.GetAllBookings()
 }

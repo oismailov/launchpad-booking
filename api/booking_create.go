@@ -63,7 +63,7 @@ func isValidBooking(booking model.Booking) bool {
 		return false
 	}
 
-	hasDuplicatedDestination, err := hasDuplicatedDestination(booking)
+	hasDuplicatedDestination, err := hasDuplicatedBooking(booking)
 	if err != nil || hasDuplicatedDestination == true {
 		return false
 	}
@@ -103,13 +103,13 @@ func isLaunchAvailable(booking model.Booking) (bool, error) {
 	return true, nil
 }
 
-func hasDuplicatedDestination(booking model.Booking) (bool, error) {
-	result, err := svc.GetBookings(booking)
+func hasDuplicatedBooking(booking model.Booking) (bool, error) {
+	count, err := svc.GetDuplicatedBookingsCount(booking)
 	if err != nil {
 		return true, err
 	}
 
-	if len(result) > 0 && result[0].DestinationID != booking.DestinationID {
+	if count > 0 {
 		return true, nil
 	}
 
