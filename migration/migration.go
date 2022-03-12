@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"github.com/oismailov/launchpad-booking/config"
-	"github.com/oismailov/launchpad-booking/db"
 	"github.com/oismailov/launchpad-booking/model"
+	"github.com/oismailov/launchpad-booking/persistance"
 )
 
 func main() {
 	config.LoadConfig()
-	dbInstance := db.GetInstance()
+	dbInstance := persistance.GetInstance()
 
 	err := dbInstance.AutoMigrate(
 		&model.SpaseXLaunch{},

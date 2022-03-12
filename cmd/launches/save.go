@@ -2,7 +2,7 @@ package launches
 
 import (
 	"fmt"
-	"github.com/oismailov/launchpad-booking/db"
+	"github.com/oismailov/launchpad-booking/persistance"
 	"log"
 	"strings"
 )
@@ -31,7 +31,7 @@ func SaveLaunchesToDB(records []spacexLaunch) error {
 
 	smt = fmt.Sprintf(smt, strings.Join(valueStrings, ","))
 
-	tx := db.GetInstance().Begin()
+	tx := persistance.GetInstance().Begin()
 
 	if err := tx.Exec(smt, valueArgs...).Error; err != nil {
 		tx.Rollback()
