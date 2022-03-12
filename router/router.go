@@ -6,6 +6,8 @@ import (
 	"github.com/oismailov/launchpad-booking/api"
 	"github.com/oismailov/launchpad-booking/config"
 	"github.com/oismailov/launchpad-booking/middleware"
+	"github.com/oismailov/launchpad-booking/pkg/util"
+	"net/http"
 )
 
 func GetRouter() *gin.Engine {
@@ -14,6 +16,11 @@ func GetRouter() *gin.Engine {
 	r.Use(middleware.JSONMiddleware())
 	r.POST("/api/bookings", api.CreateBooking)
 	r.GET("/api/bookings", api.ListAllBookings)
+	r.DELETE("/api/bookings/:uuid", api.DeleteBooking)
+
+	r.NoRoute(func(c *gin.Context) {
+		c.JSON(http.StatusNotFound, util.Message{Message: "Page not found"})
+	})
 
 	return r
 }

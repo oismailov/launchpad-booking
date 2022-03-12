@@ -16,3 +16,7 @@ func GetBookingsByLaunchpadIdAndLaunchDate(booking model.Booking) ([]model.Booki
 func GetAllBookings() ([]model.Booking, error) {
 	return db.GetAllBookings()
 }
+
+func DeleteBookingByUUID(bookingUuid string) error {
+	return db.DeleteBookingByUuid(bookingUuid)
+}

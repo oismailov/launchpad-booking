@@ -34,3 +34,16 @@ func GetAllBookings() ([]model.Booking, error) {
 
 	return bookings, nil
 }
+
+func DeleteBookingByUuid(bookingUuid string) error {
+	if err := GetInstance().
+		Where(&model.Booking{
+			UUID: bookingUuid,
+		}).
+		Delete(&model.Booking{}).
+		Error; err != nil {
+		return err
+	}
+
+	return nil
+}
