@@ -2,11 +2,11 @@ package persistance
 
 import "github.com/oismailov/launchpad-booking/model"
 
-func GetLaunchpadByID(launchpadID string) (model.SpaseXLaunchpad, error) {
-	launchpad := model.SpaseXLaunchpad{}
+func GetLaunchpadByID(launchpadID string) (model.SpaceXLaunchpad, error) {
+	launchpad := model.SpaceXLaunchpad{}
 
 	if err := GetInstance().
-		Where(&model.SpaseXLaunchpad{LaunchpadID: launchpadID}).
+		Where(&model.SpaceXLaunchpad{LaunchpadID: launchpadID}).
 		Find(&launchpad).Error; err != nil {
 		return launchpad, err
 	}

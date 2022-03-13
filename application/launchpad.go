@@ -5,6 +5,6 @@ import (
 	"github.com/oismailov/launchpad-booking/persistance"
 )
 
-func GetLaunchpadByID(launchpadID string) (model.SpaseXLaunchpad, error) {
+func GetLaunchpadByID(launchpadID string) (model.SpaceXLaunchpad, error) {
 	return persistance.GetLaunchpadByID(launchpadID)
 }

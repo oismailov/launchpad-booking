@@ -13,10 +13,11 @@ import (
 func GetRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.Use(middleware.JSONMiddleware())
+	r.Use(middleware.JSONMiddleware(), middleware.CORSMiddleware())
 	r.POST("/api/bookings", api.CreateBooking)
 	r.GET("/api/bookings", api.ListAllBookings)
 	r.DELETE("/api/bookings/:uuid", api.DeleteBooking)
+	r.GET("/api/swagger", api.Swagger)
 
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, util.Message{Message: "Page not found"})

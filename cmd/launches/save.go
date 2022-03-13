@@ -23,7 +23,7 @@ func SaveLaunchesToDB(records []spacexLaunch) error {
 		valueArgs = append(valueArgs, record.DateLocal)
 	}
 
-	smt := "INSERT INTO spase_x_launches " +
+	smt := "INSERT INTO space_x_launches " +
 		"(launch_id, launchpad_id, date_local, created_at, updated_at) " +
 		"VALUES %s " +
 		"ON CONFLICT (launch_id, launchpad_id, date_local) " +

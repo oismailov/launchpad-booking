@@ -21,7 +21,7 @@ func SaveLaunchpadsToDB(records []spacexLaunchPad) error {
 		valueArgs = append(valueArgs, record.ID)
 	}
 
-	smt := "INSERT INTO spase_x_launchpads " +
+	smt := "INSERT INTO space_x_launchpads " +
 		"(launchpad_id, created_at, updated_at) " +
 		"VALUES %s " +
 		"ON CONFLICT (launchpad_id) " +
