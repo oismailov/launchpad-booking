@@ -3,9 +3,9 @@
   first_name: "Mike"
   last_name: "Doe"
   gender: "male"
-  birthday: "2000-01-01"
+  birthday: RAW=to_date('2000-01-01','yyyy-mm-dd')
   launchpad_id: "5fa1f220-12fc-439b-8127-6598432eee0e"
   destination_id: "ec1a1df6-f581-4133-a567-658942a3094a"
-  launch_date: "2025-01-01"
+  launch_date: RAW=to_date('2025-01-01','yyyy-mm-dd')
   created_at: "2019-01-01 12:30:00"
   updated_at: "2019-01-01 12:30:00"

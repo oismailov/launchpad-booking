@@ -135,7 +135,7 @@ func CreateBookingDataProviderWithInvalidRequestBody() []bookingDataProvider {
 				Birthday:      "2020-01-01",
 				LaunchpadID:   "5fa1f220-12fc-439b-8127-6598432eee0e",
 				DestinationID: "9c71e341-ec77-43d1-bd73-e1e0ab6be7f0",
-				LaunchDate:    "2025-01-01 00:00:00 +0000 UTC",
+				LaunchDate:    "2025-01-01",
 			},
 			"unable to create a booking", //duplicate with local booking
 			http.StatusBadRequest,
@@ -152,6 +152,34 @@ func CreateBookingDataProviderWithInvalidRequestBody() []bookingDataProvider {
 				LaunchDate:    "2023-01-01",
 			},
 			"unable to create a booking", //duplicate with SpaceX launches
+			http.StatusBadRequest,
+		},
+		{
+			model.Booking{
+				UUID:          "b86d488d-e4d4-48ef-ac09-202298e77f92",
+				FirstName:     "Mike",
+				LastName:      "Doe",
+				Gender:        "male",
+				Birthday:      "2020-01-0",
+				LaunchpadID:   "5fa1f220-12fc-439b-8127-6598432eee0e",
+				DestinationID: "ec1a1df6-f581-4133-a567-658942a3094a",
+				LaunchDate:    "2025-01-01",
+			},
+			"invalid birthday",
+			http.StatusBadRequest,
+		},
+		{
+			model.Booking{
+				UUID:          "b86d488d-e4d4-48ef-ac09-202298e77f92",
+				FirstName:     "Mike",
+				LastName:      "Doe",
+				Gender:        "male",
+				Birthday:      "2020-01-01",
+				LaunchpadID:   "5fa1f220-12fc-439b-8127-6598432eee0e",
+				DestinationID: "ec1a1df6-f581-4133-a567-658942a3094a",
+				LaunchDate:    "2025-01-0",
+			},
+			"invalid launch_date",
 			http.StatusBadRequest,
 		},
 	}
