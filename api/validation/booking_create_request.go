@@ -13,8 +13,15 @@ func ValidateCreateBookingRequest(booking model.Booking) error {
 		return err
 	}
 
-	isValidBooking := isValidBooking(booking)
+	if !isValidLaunchDate(booking) {
+		return errors.New("invalid launch_date")
+	}
 
+	if !isValidBirthDay(booking) {
+		return errors.New("invalid birthday")
+	}
+
+	isValidBooking := isValidBooking(booking)
 	if isValidBooking == false {
 		return errors.New("unable to create a booking")
 	}
@@ -25,6 +32,14 @@ func ValidateCreateBookingRequest(booking model.Booking) error {
 	}
 
 	return nil
+}
+
+func isValidLaunchDate(booking model.Booking) bool {
+	return validator.IsTime(booking.LaunchDate, "2006-01-02")
+}
+
+func isValidBirthDay(booking model.Booking) bool {
+	return validator.IsTime(booking.Birthday, "2006-01-02")
 }
 
 func isValidBooking(booking model.Booking) bool {

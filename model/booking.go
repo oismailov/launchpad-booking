@@ -9,7 +9,7 @@ type Booking struct {
 	Birthday      string `valid:"required"  json:"birthday"`
 	LaunchpadID   string `valid:"required"  json:"launchpad_id"`
 	DestinationID string `valid:"required"  json:"destination_id"`
-	LaunchDate    string `valid:"required" json:"launch_date"`
+	LaunchDate    string `valid:"required" json:"launch_date" gorm:"date"`
 
 	BaseModel
 }

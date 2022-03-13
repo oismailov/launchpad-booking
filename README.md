@@ -14,14 +14,14 @@ This is done in that way to split booking creation and SpaceX API parser.
 - Start docker containers: `make start`
 - Create database schemas: `make migrate`
 - Load SpaceX launches and launchpad data: `make load-spase-x-data`
-- Open `http://127.0.0.1:9000` in browser to get list of available endpoints
+- Open `http://127.0.0.1:9000` in browser to get list of available endpoints (swagger)
 - Run tests: `make tests`
 
 ## Project Stack
-- Docker
 - Golang
 - Postgresql
-
+- Docker
+- Swagger
 
 ## Configuration
 - Config files are localed in `config` directory;
