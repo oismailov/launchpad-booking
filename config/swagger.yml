@@ -1,0 +1,133 @@
+swagger: "2.0"
+info:
+  description: "This is API documentation for Launchpad Booking project"
+  version: "1.0.0"
+  title: " Launchpad Booking API"
+host: "localhost:8003"
+basePath: "/api/"
+schemes:
+  - http
+  - https
+paths:
+  /bookings:
+    post:
+      tags:
+        - "Bookings"
+      summary: "Create booking"
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              first_name:
+                type: string
+                example: "Mike"
+              last_name:
+                type: string
+                example: "Doe"
+              gender:
+                type: string
+                example: "male"
+              birthday:
+                type: string
+                example: "2020-01-01"
+              launchpad_id:
+                type: string
+                example: "5e9e4501f5090910d4566f83"
+              destination_id:
+                type: string
+                example: "ec1a1df6-f581-4133-a567-658942a3094a"
+              launch_date:
+                type: string
+                example: "2025-01-02"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/BookingResponse"
+        400:
+          description: "unable to create a booking"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                example: "unable to create a booking"
+    get:
+      tags:
+        - "Bookings"
+      summary: "Get all bookings"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BookingResponse"
+  /bookings/{uuid}:
+    delete:
+      tags:
+        - "Bookings"
+      summary: "Delete single booking by it's uuid"
+      parameters:
+        - name: "uuid"
+          in: "path"
+          description: "Uuid of booking"
+          default: "371d3b66-441c-45ed-bef3-b330fc648794"
+          required: true
+          type: string
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                example: "booking has been deleted"
+        400:
+          description: "invalid booking UUID"
+          schema:
+            $ref: "#/definitions/InvalidUuidString"
+definitions:
+  InvalidUuidString:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "invalid booking UUID"
+  BookingResponse:
+    type: "object"
+    properties:
+      uuid:
+        type: "string"
+        example: "371d3b66-441c-45ed-bef3-b330fc648794"
+      first_name:
+        type: "string"
+        example: "Mike"
+      last_name:
+        type: "string"
+        example: "Doe"
+      gender:
+        type: "string"
+        example: "male"
+      birthday:
+        type: "string"
+        example: "2020-01-01"
+      launchpad_id:
+        type: "string"
+        example: "5e9e4501f5090910d4566f83"
+      destination_id:
+        type: "string"
+        example: "ec1a1df6-f581-4133-a567-658942a3094a"
+      launch_date:
+        type: "string"
+        example: "2025-01-06"
+      createdAt:
+        type: "string"
+        example: "2019-11-15T17:24:24+02:00"
+      updatedAt:
+        type: "string"
+        example: "2019-11-15T17:24:24+02:00"

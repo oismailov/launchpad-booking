@@ -8,6 +8,9 @@ COPY go.mod ./
 RUN go mod vendor
 RUN go mod download
 
+RUN mkdir -p ./docker/postgres/data
+RUN mkdir -p ./docker/pgadmin/data
+
 COPY ./ ./
 RUN go build -o main .
 

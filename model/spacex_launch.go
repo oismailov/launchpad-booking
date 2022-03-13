@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type SpaseXLaunch struct {
+type SpaceXLaunch struct {
 	ID          uint      `json:"-" gorm:"primary_key"`
 	LaunchID    string    `valid:"required"  json:"launch_id"`
 	LaunchpadID string    `valid:"required"  json:"launchpad_id"`

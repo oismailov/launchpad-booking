@@ -6,6 +6,6 @@ import (
 	"time"
 )
 
-func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaseXLaunch, error) {
+func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaceXLaunch, error) {
 	return persistance.GetLaunchByLaunchpadIdAndDate(launchpadID, date)
 }

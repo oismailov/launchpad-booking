@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaseXLaunch, error) {
-	launch := model.SpaseXLaunch{}
+func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaceXLaunch, error) {
+	launch := model.SpaceXLaunch{}
 
 	if err := GetInstance().
-		Where(&model.SpaseXLaunch{
+		Where(&model.SpaceXLaunch{
 			LaunchpadID: launchpadID,
 			DateLocal:   date,
 		}).
