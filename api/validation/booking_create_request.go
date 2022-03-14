@@ -26,11 +26,6 @@ func ValidateCreateBookingRequest(booking model.Booking) error {
 		return errors.New("unable to create a booking")
 	}
 
-	err := application.SaveBooking(&booking)
-	if err != nil {
-		return errors.New("unable to save a booking")
-	}
-
 	return nil
 }
 
