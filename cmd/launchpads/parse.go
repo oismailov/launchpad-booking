@@ -3,7 +3,6 @@ package launches
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
@@ -13,24 +12,23 @@ type spacexLaunchPad struct {
 	ID string `json:"id"`
 }
 
-func GetParsedLaunchpads() []spacexLaunchPad {
+func GetParsedLaunchpads() ([]spacexLaunchPad, error) {
 	response, err := http.Get(spacexLaunchpadsApi)
-
 	if err != nil {
-		log.Fatal(err.Error())
+		return nil, err
 	}
 
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var spacexData []spacexLaunchPad
 
 	err = json.Unmarshal(responseData, &spacexData)
 	if err != nil {
-		log.Fatal(err.Error())
+		return nil, err
 	}
 
-	return spacexData
+	return spacexData, nil
 }

@@ -3,8 +3,8 @@ package api_test
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/oismailov/launchpad-booking/config"
-	"github.com/oismailov/launchpad-booking/persistance"
 	"github.com/oismailov/launchpad-booking/pkg/migration"
+	"github.com/oismailov/launchpad-booking/repository"
 	r "github.com/oismailov/launchpad-booking/router"
 	"gopkg.in/testfixtures.v2"
 	"log"
@@ -25,19 +25,22 @@ func init() {
 	migration.Migrate()
 
 	router = r.GetRouter()
-	db, err := persistance.GetInstance().DB()
+	db, err := repository.GetConnection().DB()
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
 	fixtures, err = testfixtures.NewFolder(db, &testfixtures.PostgreSQL{}, "../fixtures")
 
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
 	if err := fixtures.Load(); err != nil {
 		log.Fatal(err)
+		return
 	}
 }
 

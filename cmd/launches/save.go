@@ -1,15 +1,15 @@
 package launches
 
 import (
+	"errors"
 	"fmt"
-	"github.com/oismailov/launchpad-booking/persistance"
-	"log"
+	"github.com/oismailov/launchpad-booking/repository"
 	"strings"
 )
 
 func SaveLaunchesToDB(records []spacexLaunch) error {
 	if len(records) <= 0 {
-		log.Println("There are no records")
+		return errors.New("there are no records")
 	}
 
 	var valueStrings []string
@@ -31,7 +31,7 @@ func SaveLaunchesToDB(records []spacexLaunch) error {
 
 	smt = fmt.Sprintf(smt, strings.Join(valueStrings, ","))
 
-	tx := persistance.GetInstance().Begin()
+	tx := repository.GetConnection().Begin()
 
 	if err := tx.Exec(smt, valueArgs...).Error; err != nil {
 		tx.Rollback()

@@ -3,7 +3,7 @@ package api_test
 import (
 	"encoding/json"
 	"github.com/oismailov/launchpad-booking/model"
-	"github.com/oismailov/launchpad-booking/persistance"
+	"github.com/oismailov/launchpad-booking/repository"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -26,7 +26,7 @@ func TestGetAllBookings_Success(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	bookings, err := persistance.GetAllBookings()
+	bookings, err := repository.GetAllBookings()
 
 	if err != nil {
 		t.Error(err)
@@ -54,7 +54,7 @@ func TestGetAllBookings_Success(t *testing.T) {
 func TestGetAllBookings_EmptyResult(t *testing.T) {
 	defer RestoreTestDatabaseState()
 
-	err := persistance.DeleteBookingByUUID(bookingTestUUID)
+	err := repository.DeleteBookingByUUID(bookingTestUUID)
 	if err != nil {
 		t.Error(err)
 	}
@@ -71,7 +71,7 @@ func TestGetAllBookings_EmptyResult(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	bookings, err := persistance.GetAllBookings()
+	bookings, err := repository.GetAllBookings()
 
 	if err != nil {
 		t.Error(err)

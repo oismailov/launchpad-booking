@@ -10,7 +10,6 @@ func ListAllBookings(c *gin.Context) {
 	bookings, err := application.GetAllBookings()
 	if err != nil {
 		util.ResponseBadRequest(c, err.Error())
-
 		return
 	}
 

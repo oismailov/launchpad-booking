@@ -16,24 +16,25 @@ type spacexLaunch struct {
 	DateLocal   time.Time `json:"date_local"`
 }
 
-func GetParsedLaunches() []spacexLaunch {
+func GetParsedLaunches() ([]spacexLaunch, error) {
 	response, err := http.Get(spacexLaunchesApi)
 
 	if err != nil {
 		log.Fatal(err.Error())
+		return nil, err
 	}
 
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var spacexData []spacexLaunch
-
 	err = json.Unmarshal(responseData, &spacexData)
 	if err != nil {
 		log.Fatal(err.Error())
+		return nil, err
 	}
 
-	return spacexData
+	return spacexData, nil
 }

@@ -1,4 +1,4 @@
-package persistance
+package repository
 
 import (
 	"github.com/oismailov/launchpad-booking/model"
@@ -8,7 +8,7 @@ import (
 func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaceXLaunch, error) {
 	launch := model.SpaceXLaunch{}
 
-	if err := GetInstance().
+	if err := GetConnection().
 		Where(&model.SpaceXLaunch{
 			LaunchpadID: launchpadID,
 			DateLocal:   date,

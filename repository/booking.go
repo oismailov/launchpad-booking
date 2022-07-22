@@ -1,9 +1,9 @@
-package persistance
+package repository
 
 import "github.com/oismailov/launchpad-booking/model"
 
 func SaveBooking(booking *model.Booking) error {
-	if err := GetInstance().Save(booking).Error; err != nil {
+	if err := GetConnection().Save(booking).Error; err != nil {
 		return err
 	}
 
@@ -13,7 +13,7 @@ func SaveBooking(booking *model.Booking) error {
 func GetBookingsByLaunchpadIdAndLaunchDate(booking model.Booking) ([]model.Booking, error) {
 	var bookings []model.Booking
 
-	if err := GetInstance().
+	if err := GetConnection().
 		Where(&model.Booking{
 			LaunchpadID: booking.LaunchpadID,
 			LaunchDate:  booking.LaunchDate,
@@ -28,7 +28,7 @@ func GetBookingsByLaunchpadIdAndLaunchDate(booking model.Booking) ([]model.Booki
 func GetAllBookings() ([]model.Booking, error) {
 	var bookings []model.Booking
 
-	if err := GetInstance().Model(&model.Booking{}).Find(&bookings).Error; err != nil {
+	if err := GetConnection().Model(&model.Booking{}).Find(&bookings).Error; err != nil {
 		return bookings, err
 	}
 
@@ -36,7 +36,7 @@ func GetAllBookings() ([]model.Booking, error) {
 }
 
 func DeleteBookingByUUID(bookingUUID string) error {
-	if err := GetInstance().
+	if err := GetConnection().
 		Where(&model.Booking{
 			UUID: bookingUUID,
 		}).

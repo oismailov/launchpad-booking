@@ -2,10 +2,10 @@ package application
 
 import (
 	"github.com/oismailov/launchpad-booking/model"
-	"github.com/oismailov/launchpad-booking/persistance"
+	"github.com/oismailov/launchpad-booking/repository"
 	"time"
 )
 
 func GetLaunchByLaunchpadIdAndDate(launchpadID string, date time.Time) (model.SpaceXLaunch, error) {
-	return persistance.GetLaunchByLaunchpadIdAndDate(launchpadID, date)
+	return repository.GetLaunchByLaunchpadIdAndDate(launchpadID, date)
 }
