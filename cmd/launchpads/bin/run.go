@@ -11,10 +11,12 @@ func main() {
 	parsedLaunchpads, err := launches.GetParsedLaunchpads()
 	if err != nil {
 		log.Fatal("unable to parse launchpads: ", err.Error())
+		return
 	}
 
 	err = launches.SaveLaunchpadsToDB(parsedLaunchpads)
 	if err != nil {
 		log.Fatal("unable to save launchpads: ", err.Error())
+		return
 	}
 }

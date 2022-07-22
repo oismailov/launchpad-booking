@@ -7,7 +7,7 @@ import (
 )
 
 func Migrate() {
-	dbInstance := repository.GetInstance()
+	dbInstance := repository.GetConnection()
 
 	err := dbInstance.AutoMigrate(
 		&model.SpaceXLaunch{},

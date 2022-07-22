@@ -12,6 +12,7 @@ func Swagger(c *gin.Context) {
 
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
 	c.String(http.StatusOK, string(b))

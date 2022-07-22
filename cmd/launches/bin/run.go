@@ -11,10 +11,12 @@ func main() {
 	parsedLaunches, err := launches.GetParsedLaunches()
 	if err != nil {
 		log.Fatal("unable to parse launches: ", err.Error())
+		return
 	}
 
 	err = launches.SaveLaunchesToDB(parsedLaunches)
 	if err != nil {
 		log.Fatal("unable to save launches: ", err.Error())
+		return
 	}
 }

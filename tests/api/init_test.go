@@ -25,19 +25,22 @@ func init() {
 	migration.Migrate()
 
 	router = r.GetRouter()
-	db, err := repository.GetInstance().DB()
+	db, err := repository.GetConnection().DB()
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
 	fixtures, err = testfixtures.NewFolder(db, &testfixtures.PostgreSQL{}, "../fixtures")
 
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
 	if err := fixtures.Load(); err != nil {
 		log.Fatal(err)
+		return
 	}
 }
 

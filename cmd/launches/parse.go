@@ -21,6 +21,7 @@ func GetParsedLaunches() ([]spacexLaunch, error) {
 
 	if err != nil {
 		log.Fatal(err.Error())
+		return nil, err
 	}
 
 	responseData, err := ioutil.ReadAll(response.Body)
