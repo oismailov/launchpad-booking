@@ -3,11 +3,11 @@ package migration
 import (
 	"fmt"
 	"github.com/oismailov/launchpad-booking/model"
-	"github.com/oismailov/launchpad-booking/persistance"
+	"github.com/oismailov/launchpad-booking/repository"
 )
 
 func Migrate() {
-	dbInstance := persistance.GetInstance()
+	dbInstance := repository.GetInstance()
 
 	err := dbInstance.AutoMigrate(
 		&model.SpaceXLaunch{},

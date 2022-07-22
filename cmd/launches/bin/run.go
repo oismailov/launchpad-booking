@@ -8,9 +8,13 @@ import (
 
 func main() {
 	config.LoadConfig()
-	parsedLaunches := launches.GetParsedLaunches()
-	err := launches.SaveLaunchesToDB(parsedLaunches)
+	parsedLaunches, err := launches.GetParsedLaunches()
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal("unable to parse launches: ", err.Error())
+	}
+
+	err = launches.SaveLaunchesToDB(parsedLaunches)
+	if err != nil {
+		log.Fatal("unable to save launches: ", err.Error())
 	}
 }

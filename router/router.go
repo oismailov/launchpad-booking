@@ -7,7 +7,6 @@ import (
 	"github.com/oismailov/launchpad-booking/config"
 	"github.com/oismailov/launchpad-booking/middleware"
 	"github.com/oismailov/launchpad-booking/pkg/util"
-	"net/http"
 )
 
 func GetRouter() *gin.Engine {
@@ -20,7 +19,7 @@ func GetRouter() *gin.Engine {
 	r.GET("/api/swagger", api.Swagger)
 
 	r.NoRoute(func(c *gin.Context) {
-		c.JSON(http.StatusNotFound, util.Message{Message: "Page not found"})
+		util.ResponseNotFound(c, "Page not found")
 	})
 
 	return r

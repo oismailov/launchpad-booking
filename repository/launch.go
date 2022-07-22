@@ -1,4 +1,4 @@
-package persistance
+package repository
 
 import (
 	"github.com/oismailov/launchpad-booking/model"

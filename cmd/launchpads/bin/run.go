@@ -8,9 +8,13 @@ import (
 
 func main() {
 	config.LoadConfig()
-	parsedLaunchpads := launches.GetParsedLaunchpads()
-	err := launches.SaveLaunchpadsToDB(parsedLaunchpads)
+	parsedLaunchpads, err := launches.GetParsedLaunchpads()
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal("unable to parse launchpads: ", err.Error())
+	}
+
+	err = launches.SaveLaunchpadsToDB(parsedLaunchpads)
+	if err != nil {
+		log.Fatal("unable to save launchpads: ", err.Error())
 	}
 }
